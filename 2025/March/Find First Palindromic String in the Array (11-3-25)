@@ -1,0 +1,17 @@
+link: https://leetcode.com/problems/find-first-palindromic-string-in-the-array/description/
+
+char* firstPalindrome(char** words, int wordsSize) {
+    int i,j; 
+    char palindrome [1000];
+
+for(i=0;i<wordsSize;i++)
+    {
+    int s=strlen(words[i]);
+    for(j=0;j<s;j++)
+    palindrome[s-j-1]= words[i][j];
+    palindrome [s]= '\0';
+    if(strcmp(palindrome, words[i]) ==0)
+    return words[i];
+    }
+    return "";
+}
