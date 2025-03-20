@@ -1,0 +1,17 @@
+int addDigits(int num) {
+    int add=0; int num1=0;
+    while(num>0){
+        num1=num%10; //let us say number is 11 so num1 = num%10 will make it 1 
+        add=add+num1; // now lets add 1 to add variable so add = 0+1
+        num=num/10; // now num ko divide kiye 10 se taaki 11 ban jaaye 1
+
+        if (num==0 && add>=10) // pehli baar mein ye condition pass nhi hogi 
+        {
+                num = add;
+                add = 0;
+        }
+
+        }
+    return add;
+    
+}
