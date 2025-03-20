@@ -1,0 +1,22 @@
+link: https://leetcode.com/problems/difference-between-element-sum-and-digit-sum-of-an-array/description/
+
+int differenceOfSum(int* nums, int numsSize) {
+    int sum=0,sod=0,sod1=0,num1=0,i,j, absolute=0;
+    for(i=0;i<numsSize;i++)
+    sum+=nums[i];
+    for(j=0;j<numsSize;j++)
+    {
+    int orgnums=nums[j];
+    sod1=0;
+    while(orgnums>0)
+    {
+    num1=orgnums%10;
+    sod1+=num1;
+    orgnums/=10;
+    }
+    sod+=sod1;
+    }
+    int diff=sum-sod;
+    absolute= abs(diff);
+    return absolute;
+}
