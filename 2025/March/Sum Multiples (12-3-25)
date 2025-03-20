@@ -1,0 +1,11 @@
+link: https://leetcode.com/problems/sum-multiples/description/
+
+int sumOfMultiples(int n) {
+    int sum=0,a=3,b=5,c=7,i;
+    for(i=1;i<=n;i++)
+    {
+    if(i%a==0 || i%b==0 || i%c==0)
+    sum+=i;
+    }
+    return sum;
+}
