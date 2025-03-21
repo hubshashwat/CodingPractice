@@ -1,0 +1,21 @@
+link: https://leetcode.com/problems/robot-return-to-origin/description/
+
+bool judgeCircle(char* moves) {
+    int i,nou=0,nod=0,nol=0,nor=0;
+    int s=strlen(moves);
+    for(i=0;i<s;i++)
+    {
+    if(moves[i] == 'U')
+    nou++;
+    else if (moves[i]=='L')
+    nol++;
+    else if(moves[i]=='R')
+    nor++;
+    else
+    nod++;
+    }
+    if(nod==nou && nor==nol)
+    return true;
+    else
+    return false;
+}
