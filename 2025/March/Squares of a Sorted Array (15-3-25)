@@ -1,0 +1,25 @@
+link: https://leetcode.com/problems/squares-of-a-sorted-array/description/
+
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* sortedSquares(int* nums, int numsSize, int* returnSize) {
+    int i,j,p,k=0,temp=0;
+    int *arr = (int*) malloc(sizeof(int)*numsSize);
+    for(i=0;i<numsSize;i++)
+    {
+    arr[k++]=(nums[i]*nums[i]);
+    }
+    for(j=0;j<k;j++)
+    {
+    for (p=j+1;p<k;p++)
+    {
+    if(arr[j]>arr[p])
+    {
+    temp=arr[j];
+    arr[j]=arr[p];
+    arr[p]=temp;
+    }}}
+    *returnSize=k;
+    return arr;
+}
