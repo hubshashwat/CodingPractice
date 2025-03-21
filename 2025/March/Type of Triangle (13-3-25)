@@ -1,0 +1,17 @@
+link: https://leetcode.com/problems/type-of-triangle/description/
+
+char* triangleType(int* nums, int numsSize) {
+    static char str[20];
+    if((nums[0]+nums[1])> nums[2] && (nums[0]+nums[2])>nums [1] && (nums[1]+nums[2])>nums[0])
+    {
+    if((nums[0]==nums[1]) && (nums[1]==nums[2]))
+    strcpy(str, "equilateral");
+    else if((nums[0]!=nums[1]) && (nums[1]!=nums[2]) && (nums[2]!=nums[0]))
+    strcpy(str, "scalene");
+    else
+    strcpy(str, "isosceles");
+    }
+    else
+    strcpy(str, "none");
+    return str;
+}
