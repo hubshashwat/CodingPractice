@@ -1,0 +1,12 @@
+link: int subtractProductAndSum(int n) {
+    int pro=1,sum=0,num1=0;
+    while(n>0)
+    {
+    num1=n%10;
+    sum+=num1;
+    pro*=num1;
+    n/=10;
+    }
+    int diff=pro-sum;
+    return diff;
+}
