@@ -1,0 +1,41 @@
+link: https://leetcode.com/problems/backspace-string-compare?envType=problem-list-v2&envId=5b3f1q5v
+
+bool backspaceCompare(char* s, char* t) {
+    int l1=strlen(s);
+    int l2=strlen(t);
+    char* s1=(char*) malloc((l1+1)*sizeof(char));
+    char* t1=(char*) malloc((l2+1)*sizeof(char));
+    int top1=-1,top2=-1;
+    for(int i=0;i<l1;i++)
+    {
+        if(top1>=0 && s[i]=='#')
+        top1--;
+        else
+        {
+            if(s[i]!='#')
+            { top1++;s1[top1]=s[i];}
+        }
+    }
+     for(int i=0;i<l2;i++)
+    {
+        if(top2>=0 && t[i]=='#')
+        top2--;
+        else
+        {
+            if(t[i]!='#')
+            { top2++;t1[top2]=t[i];}
+        }
+    }
+    s1[++top1]=t1[++top2]='\0';
+    if(top1==top2)
+    {
+        for(int i=0;i<=top1;i++)
+        {
+            if(s1[i]!=t1[i])
+            return false;
+        }
+    }
+    else
+    return false;
+    return true;
+}
