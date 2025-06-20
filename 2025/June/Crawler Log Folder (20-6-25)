@@ -1,0 +1,18 @@
+link: https://leetcode.com/problems/crawler-log-folder?envType=problem-list-v2&envId=5b3f1q5v
+
+int minOperations(char** logs, int logsSize) {
+    int top=-1;
+    for(int i=0;i<logsSize;i++)
+    {
+        if(strcmp(logs[i],"./")==0)
+        continue;
+        else if(top>=0 && (strcmp(logs[i],"../")==0))
+        top--;
+        else
+        { if(strcmp(logs[i],"../")!=0)
+        {
+            top++;
+        }}
+    }
+    return (top+1);
+}
