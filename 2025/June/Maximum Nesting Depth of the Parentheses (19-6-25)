@@ -1,0 +1,28 @@
+link: https://leetcode.com/problems/maximum-nesting-depth-of-the-parentheses?envType=problem-list-v2&envId=5b3f1q5v
+
+int maxDepth(char* s) {
+    int l=strlen(s);
+    char* stack=(char*)malloc((l+1)*sizeof(char));
+    int top=-1,countleft=0,countright=0,max=0;
+    for(int i=0;i<l;i++)
+    {   int a;
+        top++;
+        stack[top]=s[i];
+        if(top>0){
+         a=top;
+         countleft=countright=0;
+        while(a!=0)
+        {
+            a--;
+            if(stack[a]=='(')
+            countleft++;
+            if(stack[a]==')')
+            countright++;
+        }
+        int diff=countleft-countright;
+        if(diff>max)
+        max=diff;
+    }}
+    stack[++top]='\0';
+    return max;
+    }
