@@ -1,0 +1,45 @@
+https://leetcode.com/problems/find-the-minimum-and-maximum-number-of-nodes-between-critical-points/
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* nodesBetweenCriticalPoints(struct ListNode* head, int* returnSize) 
+{
+    int *arr=(int *)malloc(sizeof(int)*3);
+    *returnSize=2;
+    int maxdist,mindist;
+    struct ListNode *current=head,*nextnode=head,*prevnode=0;
+    int count=0,critidx[100000],i=0;
+    while(nextnode!=0)
+    {
+        count++;
+        nextnode=nextnode->next;
+        if(prevnode!=0 && nextnode!=0)
+        {
+            if((current->val>prevnode->val && current->val>nextnode->val) || (current->val<prevnode->val && current->val<nextnode->val))
+            critidx[i++]=count;
+        }
+        prevnode=current;
+        current=nextnode;
+    }
+    
+  if(i>=2) { mindist=critidx[1]-critidx[0];}
+    for(int j=0;j<i-1;j++)
+    {
+        if((critidx[j+1]-critidx[j])< mindist)
+        mindist=critidx[j+1]-critidx[j];
+    }
+    if(i<2)
+    {arr[0]=-1;arr[1]=-1;}
+    else
+    { maxdist=critidx[i-1]-critidx[0];
+     arr[0]=mindist;arr[1]=maxdist;}
+     return arr;
+}
