@@ -1,0 +1,25 @@
+https://leetcode.com/problems/maximum-twin-sum-of-a-linked-list/
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+int pairSum(struct ListNode* head)
+{
+    int max=0,size,i=0,sum=0;
+    int arr[100000];
+    struct ListNode *temp=head;
+    while(temp!=0)
+    {arr[size++]=temp->val;temp=temp->next;}
+        while(i<(size-(i+1)))
+        {
+            sum=arr[i]+arr[size-(1+i)];
+            i++;
+            if(sum>max)
+            max=sum;
+        }
+    return max;
+}
