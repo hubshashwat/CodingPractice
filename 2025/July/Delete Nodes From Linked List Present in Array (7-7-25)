@@ -1,0 +1,33 @@
+(code not convenient for extreme/edge cases, use hashset instead of nested loop)
+
+link: https://leetcode.com/problems/delete-nodes-from-linked-list-present-in-array/
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+struct ListNode* modifiedList(int* nums, int numsSize, struct ListNode* head) {
+    struct ListNode* dummy=(struct ListNode *)malloc(sizeof(struct ListNode));
+    dummy->next=head;//dummy node is created anywhere in the memory just so that we can maintain prev pointer and no error on that part!
+    struct ListNode *curr=head,*prev=dummy;
+    for(int i=0;i<numsSize;i++)
+    { 
+        prev=dummy;curr=dummy->next;
+        while(curr!=0)
+        {
+            if(nums[i]==curr->val)
+            {
+              prev->next=curr->next;
+                free(curr);
+                curr=prev->next;
+            }
+             else {
+                prev=curr;
+                curr=curr->next;
+        }
+     }}
+     return dummy->next;
+}
