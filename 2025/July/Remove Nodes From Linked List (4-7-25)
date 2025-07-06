@@ -1,0 +1,33 @@
+link: https://leetcode.com/problems/remove-nodes-from-linked-list/
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+struct ListNode* removeNodes(struct ListNode* head) {
+    int arr[100000],size=0;
+    struct ListNode *temp=head;
+    while(temp!=NULL)
+    {arr[size++]=temp->val;temp=temp->next;}
+    int maxSoFar = arr[size - 1];
+for (int i = size - 2; i >= 0; i--) {
+    if (arr[i] < maxSoFar)
+        arr[i] = 0;
+    else
+        maxSoFar = arr[i];
+}
+    temp=head;
+        for(int j=0;j<size;j++)
+        {
+        if(arr[j]!=0){
+        temp->val=arr[j];
+        if(j!=(size-1))
+        temp=temp->next;}
+    }
+    if(temp!=NULL) 
+    {temp->next=NULL;}
+     return head;
+}
