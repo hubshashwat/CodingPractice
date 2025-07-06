@@ -1,0 +1,72 @@
+link: https://leetcode.com/problems/spiral-matrix-iv/
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+/**
+ * Return an array of arrays of size *returnSize.
+ * The sizes of the arrays are returned as *returnColumnSizes array.
+ * Note: Both returned array and *columnSizes array must be malloced, assume caller calls free().
+ */
+int** spiralMatrix(int m, int n, struct ListNode* head, int* returnSize, int** returnColumnSizes) {
+    struct ListNode *temp=head;
+    int** arr = (int **)malloc(m* sizeof(int *));//for rows
+    *returnColumnSizes = (int *)malloc(sizeof(int) * m);
+for (int i = 0; i < m; i++) {
+    arr[i] = (int *)malloc(n * sizeof(int));//for columns
+(*returnColumnSizes)[i] = n;}
+for(int i=0;i<m;i++)
+{
+    for(int j=0;j<n;j++)
+    arr[i][j]=-1;
+}
+     int top=0,left=0,dir=1,bottom=m-1,right=n-1;
+     while (top<=bottom && left<=right && temp!=0)
+     {
+    if (dir == 1) {    // moving left->right
+      for (int i = left; i <= right && temp!=0; i++) {
+        arr[top][i]=temp->val;
+        temp=temp->next;
+      }
+      // Since we have traversed the whole first
+      // row, move down to the next row.
+      ++top;
+      dir = 2;
+    } 
+    else if (dir == 2) {     // moving top->bottom
+      for (int i = top; i <= bottom && temp!=0; i++) {
+          arr[i][right] = temp->val;
+          temp=temp->next;
+      }
+      // Since we have traversed the whole last
+      // column, move left to the previous column.
+      --right;
+      dir = 3;
+    } 
+    else if (dir == 3) {     // moving right->left
+      for (int i = right; i >= left && temp!=0; i--) {
+          arr[bottom][i]= temp->val;
+          temp=temp->next;
+      }
+      // Since we have traversed the whole last
+      // row, move up to the previous row.
+      --bottom;
+      dir = 4;
+    } 
+    else if (dir == 4) {     // moving bottom->up
+      for (int i = bottom; i >= top && temp!=0; i--) {
+          arr[i][left]= temp->val;
+          temp=temp->next;
+      }
+      // Since we have traversed the whole first
+      // col, move right to the next column.
+      ++left;
+      dir = 1;
+    }}
+    *returnSize=m;
+    return arr;
+}
