@@ -1,0 +1,61 @@
+link: https://leetcode.com/problems/spiral-matrix-ii/
+
+/**
+ * Return an array of arrays of size *returnSize.
+ * The sizes of the arrays are returned as *returnColumnSizes array.
+ * Note: Both returned array and *columnSizes array must be malloced, assume caller calls free().
+ */
+int** generateMatrix(int n, int* returnSize, int** returnColumnSizes) {
+    int number=1;
+
+    int** arr = (int **)malloc(n * sizeof(int *));//for rows
+    *returnColumnSizes = (int*)malloc(sizeof(int) * n);
+for (int i = 0; i < n; i++) {
+    arr[i] = (int *)malloc(n * sizeof(int));//for columns
+(*returnColumnSizes)[i] = n;}
+     int top=0,left=0,dir=1,bottom=n-1,right=n-1;
+     while (top <= bottom && left <= right) {
+
+    if (dir == 1) {    // moving left->right
+      for (int i = left; i <= right; i++) {
+        arr[top][i]=number;
+        number++;
+      }
+      // Since we have traversed the whole first
+      // row, move down to the next row.
+      ++top;
+      dir = 2;
+    } 
+    else if (dir == 2) {     // moving top->bottom
+      for (int i = top; i <= bottom; i++) {
+          arr[i][right] = number;
+          number++;
+      }
+      // Since we have traversed the whole last
+      // column, move left to the previous column.
+      --right;
+      dir = 3;
+    } 
+    else if (dir == 3) {     // moving right->left
+      for (int i = right; i >= left; i--) {
+          arr[bottom][i]= number;
+          number++;
+      }
+      // Since we have traversed the whole last
+      // row, move up to the previous row.
+      --bottom;
+      dir = 4;
+    } 
+    else if (dir == 4) {     // moving bottom->up
+      for (int i = bottom; i >= top; i--) {
+          arr[i][left]= number;
+          number++;
+      }
+      // Since we have traversed the whole first
+      // col, move right to the next column.
+      ++left;
+      dir = 1;
+    }}
+    *returnSize=n;
+    return arr;
+}
