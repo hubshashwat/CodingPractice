@@ -1,0 +1,34 @@
+link: https://leetcode.com/problems/insert-greatest-common-divisors-in-linked-list/
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+struct ListNode* insertGreatestCommonDivisors(struct ListNode* head) {
+    struct ListNode* current=head,*later,*newnode;
+    later=current->next;
+    int gcd=0,value=0;
+    while(later!=0)
+    {
+        gcd=0;
+        newnode=(struct ListNode*)malloc(sizeof(struct ListNode));
+        if((current->val)<(later->val))
+        value=current->val;
+        else
+        value=later->val;
+        for(int i=1;i<=value;i++)
+        {
+            if((current->val)%i==0  && (later->val)%i==0)
+            gcd=i;
+        }
+        newnode->val=gcd;
+        current->next=newnode;
+        newnode->next=later;
+        current=later;
+        later=later->next;
+    }
+    return head;
+}
