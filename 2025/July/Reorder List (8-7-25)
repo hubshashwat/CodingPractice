@@ -1,0 +1,44 @@
+link: https://leetcode.com/problems/reorder-list/description/
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+   //reversing the original list
+    struct ListNode* reverseList(struct ListNode* head)
+    {
+    if (head == NULL || head->next == NULL)
+        return head;
+
+    struct ListNode* newHead = reverseList(head->next);
+
+    head->next->next = head;
+    head->next = NULL;
+
+    return newHead;
+    }
+void reorderList(struct ListNode* head) {
+    struct ListNode *temp=head,*head2=0,*tempnew,*tempnewnext,*tempnext=0;
+   //find the middle element pointer next to which is the 2nd half 
+     struct ListNode *slow = head, *fast = head;
+    while (fast->next && fast->next->next) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+  head2 = reverseList(slow->next);//now head points to last element and head2 points to 1st element
+     slow->next=0;
+
+    temp=head2;tempnew=head;
+    while(temp!=0)
+    {
+        tempnext=temp->next;
+        tempnewnext=tempnew->next;
+        tempnew->next=temp;
+        temp->next=tempnewnext;
+        temp=tempnext;
+        tempnew=tempnewnext;
+    }
+}
