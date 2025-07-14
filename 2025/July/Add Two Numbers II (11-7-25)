@@ -1,0 +1,47 @@
+link: https://leetcode.com/problems/add-two-numbers-ii/description/
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+
+ struct ListNode *reverse(struct ListNode *head)
+ {
+    if(head==NULL || head->next==NULL)
+    return head;
+    struct ListNode *newhead=reverse(head->next);
+    head->next->next=head;
+    head->next=NULL;
+    return newhead;
+ }
+struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
+    struct ListNode* temp,*head=0;
+    int carry = 0;
+    l1=reverse(l1);l2=reverse(l2);
+ while (l1 != NULL || l2 != NULL || carry != 0) {
+        int sum = carry;
+        if (l1 != NULL) {
+            sum += l1->val;
+            l1 = l1->next;
+        }
+        if (l2 != NULL) {
+            sum += l2->val;
+            l2 = l2->next;
+        }
+
+        carry = sum / 10;
+    struct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));
+        newNode->val = sum % 10;
+        newNode->next = NULL;
+        if(head==0){head=temp=newNode;}
+        else
+        {
+        temp->next = newNode;
+        temp = newNode;}
+    }
+
+    return reverse(head);
+}
