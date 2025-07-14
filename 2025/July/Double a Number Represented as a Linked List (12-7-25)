@@ -1,0 +1,37 @@
+link: https://leetcode.com/problems/double-a-number-represented-as-a-linked-list/description/
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+
+ struct ListNode *reverse(struct ListNode *head)
+ {
+    if(head==NULL || head->next==NULL)
+    return head;
+    struct ListNode *newhead=reverse(head->next);
+    head->next->next=head;
+    head->next=NULL;
+    return newhead;
+ }
+struct ListNode* doubleIt(struct ListNode* head) 
+{
+    struct ListNode *temp,*res=0;
+    int carry=0;
+    head=reverse(head);
+    while(carry!=0 || head!=NULL)
+    {
+        int product=carry;
+       if(head!=0){ product+=(head->val)*2;
+        head=head->next;}
+        carry=product/10;
+        struct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));
+        newNode->val = product % 10;
+        newNode->next = res;
+        res=newNode;
+    }
+    return res;
+}
