@@ -1,0 +1,34 @@
+link: https://leetcode.com/problems/next-greater-node-in-linked-list/description/
+
+/* struct ListNode {
+    int val;
+    struct ListNode *next;
+};*/
+
+int* nextLargerNodes(struct ListNode* head, int* returnSize) {
+    int* values = (int*)malloc(sizeof(int) * 10000);  // stores node values
+    int* result = (int*)calloc(10000, sizeof(int));   // result initialized to 0
+    int stack[10000];  // stack for indices
+    int top = -1;
+    int n = 0;
+
+    // Step 1: Copy linked list values into array
+    struct ListNode* temp = head;
+    while (temp != NULL) {
+        values[n++] = temp->val;
+        temp = temp->next;
+    }
+
+    // Step 2: Monotonic decreasing stack
+    for (int i = 0; i < n; i++) {
+        // While current value is greater than value at stack[top]
+        while (top >= 0 && values[i] > values[stack[top]]) {
+            int index = stack[top--]; // Pop the index
+            result[index] = values[i]; // Update result at that index
+        }
+        stack[++top] = i; // Push current index
+    }
+
+    *returnSize = n;
+    return result;
+}
