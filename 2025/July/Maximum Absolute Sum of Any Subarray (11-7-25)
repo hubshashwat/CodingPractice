@@ -1,0 +1,25 @@
+link: https://leetcode.com/problems/maximum-absolute-sum-of-any-subarray/description/
+
+int maxAbsoluteSum(int* nums, int numsSize) {
+      // Stores the result (maximum sum found so far)
+    int res =abs (nums[0]);
+    
+    // Maximum sum of subarray ending at current position
+    int maxEnding = nums[0];
+    int minEnding=nums[0];
+
+    for (int i = 1; i < numsSize; i++) {
+        minEnding=(minEnding> 0) ? nums[i]:(minEnding+nums[i]);
+        // Either extend the previous subarray or start 
+        // new from current element
+        maxEnding = (maxEnding > 0) ? (maxEnding + nums[i]): nums[i];
+    int absMax = abs(maxEnding);
+        int absMin = abs(minEnding);
+        if (absMin > absMax)
+            absMax = absMin;
+        if (absMax > res)
+            res = absMax;
+        
+    }
+    return res;
+}
