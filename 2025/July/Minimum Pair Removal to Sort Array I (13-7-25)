@@ -1,0 +1,57 @@
+link: https://leetcode.com/problems/minimum-pair-removal-to-sort-array-i/description/
+
+bool checkSorted(struct ListNode* head, int numsSize)
+{
+    struct ListNode *curr = head, *nextnode = head->next;
+    while (nextnode != 0)
+    {
+        if (curr->val > nextnode->val)
+            return false;
+        curr = curr->next;
+        nextnode = nextnode->next;
+    }
+    return true;
+}
+
+int minimumPairRemoval(int* nums, int numsSize) {
+    int minsum = 0, sum = 0, operations = 0;
+    struct ListNode *mini, *minj, *temp, *head = 0;
+    
+    // Build Linked List
+    for (int i = 0; i < numsSize; i++) {
+        struct ListNode *newnode = (struct ListNode *)malloc(sizeof(struct ListNode));
+        newnode->val = nums[i];
+        newnode->next = 0;
+        if (head == 0)
+            head = temp = newnode;
+        else {
+            temp->next = newnode;
+            temp = newnode;
+        }
+    }
+if (checkSorted(head,numsSize)) return 0;
+start: // label
+    temp = head;
+    minsum = 1e9;
+    while (temp != 0 && temp->next != 0)
+    {
+        sum = temp->val + temp->next->val;
+        if (sum < minsum)
+        {
+            minsum = sum;
+            mini = temp;
+            minj = temp->next;
+        }
+        temp = temp->next;
+    }
+
+    mini->val = minsum;
+    mini->next = minj->next;
+    free(minj);
+    operations++;
+
+    if (checkSorted(head, numsSize - operations) == true)
+        return operations;
+    else
+        goto start;// or use while nested loops
+}
