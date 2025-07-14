@@ -1,0 +1,60 @@
+link: https://leetcode.com/problems/reverse-nodes-in-k-group/description/
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+
+ struct ListNode* reverse(struct ListNode* head) {
+    if (head == NULL || head->next == NULL)
+        return head;
+
+    struct ListNode* newHead = reverse(head->next);
+    head->next->next = head;
+    head->next = NULL; 
+    return newHead;
+}
+struct ListNode* reverseKGroup(struct ListNode* head, int k)
+//honestly just edited my code from the question of "reversing even length of nodes"
+ {   struct ListNode *dummy=(struct ListNode *)malloc(sizeof(struct ListNode));
+ dummy->val=0;
+ dummy->next=head;
+    struct ListNode *beforetemp=dummy, *temp = head;
+
+    while (temp != NULL) {
+        // Step 1: Count actual group size
+        struct ListNode* countPtr = temp;
+        int count = 1;
+        while (count < k && countPtr->next != NULL) {
+            countPtr = countPtr->next;
+            count++;
+        }
+
+        struct ListNode* start = temp;
+        struct ListNode* end = countPtr;
+        struct ListNode* nextGroup = end->next;
+
+        // Temporarily isolate the group
+        end->next = NULL;
+
+        if (count == k) {
+            // Reverse the even-length group
+             end = reverse(start);
+            beforetemp->next = end;
+            start->next = nextGroup;  // starteven is now the tail after reversal
+            beforetemp = start;
+        } else {
+            // Don't reverse, just link normally
+            
+            beforetemp = end;
+            end->next=nextGroup;
+            
+        }
+   temp = nextGroup;
+    }
+
+    return dummy->next;
+}
