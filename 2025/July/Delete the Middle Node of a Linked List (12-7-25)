@@ -1,0 +1,24 @@
+link: https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/description/
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+struct ListNode* deleteMiddle(struct ListNode* head) {
+    struct ListNode *slow=head,*beforeslow=0,*fast=head;
+    if(head==NULL || head->next==NULL)
+    return NULL;
+    while(fast != NULL && fast->next!=NULL)
+    {
+       beforeslow=slow;
+       slow=slow->next;
+       fast=fast->next->next;
+    }
+    beforeslow->next=slow->next;
+    slow->next=0;
+    free(slow);
+    return head;
+}
