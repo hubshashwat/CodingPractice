@@ -1,0 +1,30 @@
+link: https://leetcode.com/problems/build-an-array-with-stack-operations/description/
+
+
+
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+char** buildArray(int* target, int targetSize, int n, int* returnSize) {
+    // Allocate space for the output operations (2 ops max per number) and for each n
+    char** ops = (char**)malloc(((2 * n)) * sizeof(char*));
+    int size = 0;  // number of operations added
+    int j = 0;     // index for target array
+
+    for (int i = 1; i <= n && j < targetSize; i++) {
+        if (i == target[j]) {
+            ops[size] = (char*)malloc(5);  // "Push" + '\0'
+            strcpy(ops[size++], "Push");
+            j++;
+        }
+     else {
+            ops[size] = (char*)malloc(5);
+            strcpy(ops[size++], "Push");
+            ops[size] = (char*)malloc(4);  // "Pop" + '\0'
+            strcpy(ops[size++], "Pop");
+        }
+    }
+
+    *returnSize = size;
+    return ops;
+}
