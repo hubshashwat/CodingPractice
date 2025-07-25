@@ -1,0 +1,42 @@
+link: https://leetcode.com/problems/find-the-winner-of-the-circular-game/description/
+
+
+int findTheWinner(int n, int k) {
+    struct ListNode *temp,*head=0;
+   
+    if(k==1 || n==1)
+    return n;
+    
+    for(int i=1;i<=n;i++)
+    {
+        struct ListNode *newnode=(struct ListNode *)malloc(sizeof(struct ListNode));
+        newnode->val=i;
+        newnode->next=0;
+        if(head==0)
+        head=temp=newnode;
+        else
+        {
+            temp->next=newnode;
+            temp=newnode;
+        }
+    }
+    temp->next=head;// to make it a circular linked list
+    temp=head; struct ListNode *prev=0;
+    while(prev!=temp )
+    { 
+    for(int i=1;i<k;i++)
+    {   prev=temp;
+        temp=temp->next;
+    }
+   if(prev!=0) {
+   prev->next=temp->next;
+   temp->next=0;
+   temp=prev->next;}
+   else{
+   prev=temp->next;
+    temp->next=0;
+    temp=prev;
+    }
+}
+return temp->val;
+}
