@@ -1,0 +1,32 @@
+link: https://leetcode.com/problems/reverse-prefix-of-word/description/
+
+
+
+char* reversePrefix(char* word, char ch) {
+    int len = strlen(word);
+    char* result = (char*)malloc((len + 1) * sizeof(char)); // +1 for '\0'
+    int i = 0;
+
+    for (i = 0; i < len; i++) {
+        if (word[i] == ch)
+            break;
+    }
+
+    // If 'ch' not found, just copy the original
+    if (i == len) {
+        strcpy(result, word);
+        return result;
+    }
+
+    int index = 0;
+    for (int j = i; j >= 0; j--) {
+        result[index++] = word[j];
+    }
+
+    for (int k = i + 1; k < len; k++) {
+        result[index++] = word[k];
+    }
+
+    result[index] = '\0';
+    return result;
+}
