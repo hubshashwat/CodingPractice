@@ -1,0 +1,43 @@
+link: https://leetcode.com/problems/steps-to-make-array-non-decreasing/description/
+
+// Define a struct to store both value and steps count.
+typedef struct {
+    int val;    // The array value
+    int steps;  // How many steps this element had to wait to stabilize
+} Pair;
+
+// Function to compute total steps to make array non-decreasing
+int totalSteps(int* nums, int numsSize) {
+    // Stack to store Pair (value, steps)
+    Pair stack[100000];
+    int top = -1;  // Stack top pointer
+    int res = 0;   // Final answer: maximum steps needed
+
+    // Iterate from left to right
+    for (int i = 0; i < numsSize; i++) {
+        int steps = 0;  // Track steps needed for current nums[i]
+
+        // Pop all elements from stack smaller or equal to nums[i]
+        while (top >= 0 && stack[top].val <= nums[i]) {
+            // Take maximum steps from all popped elements
+            steps = (steps > stack[top].steps) ? steps : stack[top].steps;
+            top--;
+        }
+
+        // If stack is not empty, nums[i] depends on previous numbers
+        if (top >= 0)
+            steps++;  // It takes one more step after the larger number is removed
+        else
+            steps = 0; // No blockers on the left side
+
+        // Update the result with maximum steps found so far
+        res = (res > steps) ? res : steps;
+
+        // Push current number and its step count onto the stack
+        stack[++top].val = nums[i];
+        stack[top].steps = steps;
+    }
+
+    // Return the maximum number of steps required
+    return res;
+}
