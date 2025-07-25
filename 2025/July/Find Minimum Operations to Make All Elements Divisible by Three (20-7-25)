@@ -1,0 +1,11 @@
+link: https://leetcode.com/problems/find-minimum-operations-to-make-all-elements-divisible-by-three/description/
+
+int minimumOperations(int* nums, int numsSize) {
+    int ops=0;
+    for(int i=0;i<numsSize;i++)
+    {
+        if(nums[i]%3!=0)
+        ops++;
+    }
+    return ops;
+}
