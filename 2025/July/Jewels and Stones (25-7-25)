@@ -1,0 +1,17 @@
+link: https://leetcode.com/problems/jewels-and-stones/description/
+
+int numJewelsInStones(char* jewels, char* stones)
+{
+    int count=0;
+    int jlen=strlen(jewels);
+    int slen=strlen(stones);
+    for(int i=0;i<slen;i++)
+    {
+        for(int j=0;j<jlen;j++)
+        {
+            if(stones[i]==jewels[j])
+            {count++;break;}
+        }
+    }
+    return count;
+}
