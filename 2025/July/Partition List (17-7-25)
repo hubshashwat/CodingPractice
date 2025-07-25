@@ -1,0 +1,49 @@
+link: https://leetcode.com/problems/partition-list/description/
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+struct ListNode* partition(struct ListNode* head, int x) {
+    if(head==NULL || head->next==NULL)
+    return head;
+    struct ListNode *head1=0,*head2=0,*dummy1=0,*dummy2=0,*temp=head;
+    while(temp!=0)
+    {
+        if(temp->val<x)
+        {
+            struct ListNode *newnode=(struct ListNode *)malloc(sizeof(struct ListNode));
+            newnode->val=temp->val;
+            newnode->next=0;
+            if(head1==0)
+            head1=dummy1=newnode;
+            else
+            {
+                dummy1->next=newnode;
+                dummy1=newnode;
+            }
+        }
+        if(temp->val>=x)
+        {
+             struct ListNode *newnode1=(struct ListNode *)malloc(sizeof(struct ListNode));
+            newnode1->val=temp->val;
+            newnode1->next=0;
+            if(head2==0)
+            head2=dummy2=newnode1;
+            else
+            {
+                dummy2->next=newnode1;
+                dummy2=newnode1;
+            }
+        }
+        temp=temp->next;
+    }
+    if(dummy1!=0)
+    dummy1->next=head2;
+    else
+    return head;
+    return head1;
+}
