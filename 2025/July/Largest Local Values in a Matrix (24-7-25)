@@ -1,0 +1,33 @@
+link: https://leetcode.com/problems/largest-local-values-in-a-matrix/description/
+
+/**
+ * Return an array of arrays of size *returnSize.
+ * The sizes of the arrays are returned as *returnColumnSizes array.
+ * Note: Both returned array and *columnSizes array must be malloced, assume caller calls free().
+ */
+int** largestLocal(int** grid, int gridSize, int* gridColSize, int* returnSize, int** returnColumnSizes) {
+    *returnSize=gridSize-2;
+    *returnColumnSizes = (int*)malloc((gridSize - 2) * sizeof(int));
+    int max=0;
+    int **maxLocal=(int**)malloc((gridSize-2)*sizeof(int*));
+    for(int i=0;i<gridSize-2;i++){
+    maxLocal[i]=(int*)malloc((gridSize-2)*sizeof(int));
+     (*returnColumnSizes)[i] = gridSize - 2; // each row has n-2 columns
+     }
+     int a,b;
+    for(a=1;a<=(gridSize-2);a++)
+    {
+        for(b=1;b<=(gridSize-2);b++)
+        {
+    max=0;
+    for(int i=a-1;i<(a+2);i++)
+    { 
+        for(int j=b-1;j<(b+2);j++)
+        { 
+         if(grid[i][j]>max)
+         max=grid[i][j];
+        } }
+    maxLocal[a-1][b-1]=max;
+}}
+return maxLocal;
+}
