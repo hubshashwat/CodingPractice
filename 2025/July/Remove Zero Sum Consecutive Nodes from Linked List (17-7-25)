@@ -1,0 +1,32 @@
+link: https://leetcode.com/problems/remove-zero-sum-consecutive-nodes-from-linked-list/description/
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+
+struct ListNode* removeZeroSumSublists(struct ListNode* head) {
+    struct ListNode* dummy=(struct ListNode *)malloc(sizeof(struct ListNode));
+    dummy->val = 0;
+    dummy->next = head;
+    
+    struct ListNode *start = dummy;
+    
+    while (start != NULL) {
+        int sum = 0;
+        struct ListNode *end = start->next;
+        while (end != NULL) {
+            sum += end->val;
+            if (sum == 0) {
+                start->next = end->next;  // skip all nodes between start->next and end
+            }
+            end = end->next;
+        }
+        start = start->next;
+    }
+    
+    return dummy->next;
+}
