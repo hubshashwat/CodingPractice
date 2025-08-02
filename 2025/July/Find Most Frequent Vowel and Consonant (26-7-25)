@@ -1,0 +1,30 @@
+link: https://leetcode.com/problems/find-most-frequent-vowel-and-consonant/description/
+
+int maxFreqSum(char* s) 
+{
+    int maxv=0,maxc=0,count=0;
+    char arr[]={'a','e','i','u','o'};
+    for(int j=0;j<5;j++)
+    { count=0;
+    for(int i=0;i<strlen(s);i++)
+    {
+        if(arr[j]==s[i])
+        count++;
+    }
+    if(count>maxv)
+    maxv=count;
+    }
+    for(int i=0;i<strlen(s);i++)
+    {
+        if(s[i]=='a' || s[i]=='e' || s[i]=='i' || s[i]=='o' || s[i]=='u')
+        continue;
+        else
+        { count=0;
+            for(int j=0;j<strlen(s);j++)
+            { if(s[i]==s[j]) count++;}
+            if(count>maxc)
+            maxc=count;
+        }
+    }
+    return maxc+maxv;
+}
