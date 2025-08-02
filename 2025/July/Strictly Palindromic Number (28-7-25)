@@ -1,0 +1,29 @@
+link: https://leetcode.com/problems/strictly-palindromic-number/description/
+
+/**
+ * @param {number} n
+ * @return {boolean}
+ */
+var isStrictlyPalindromic = function(n) 
+{
+    function decimalToBinaryToString(decimalNumber,i) {
+  return Number(decimalNumber).toString(i);
+}
+    function reverseDigits(n) {
+        let revNum = 0;
+        while(n > 0)
+        {
+            revNum = revNum * 10 + n % 10;
+            n = Math.floor(n / 10);
+        }
+        return revNum;
+    }
+    
+for(let i=2;i<=n-2;i++)
+{
+   let num= decimalToBinaryToString(n,i);
+if(num != reverseDigits(num))
+return false;
+}
+    return true;
+};
