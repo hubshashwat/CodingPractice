@@ -1,0 +1,18 @@
+link: https://leetcode.com/problems/convert-date-to-binary/description/
+
+/**
+ * @param {string} date
+ * @return {string}
+ */
+var convertDateToBinary = function(date) {
+    function decimalToBinaryToString(decimalNumber) {
+  return Number(decimalNumber).toString(2);
+}
+let year=date.substring(0,4);
+let month=date.substring(5,7);
+let day=date.substring(8,10);
+year=decimalToBinaryToString(year);
+month=decimalToBinaryToString(month);
+day=decimalToBinaryToString(day);
+return `${year}-${month}-${day}`;
+};
