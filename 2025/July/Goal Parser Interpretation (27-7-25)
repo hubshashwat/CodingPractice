@@ -1,0 +1,23 @@
+link: https://leetcode.com/problems/goal-parser-interpretation/
+
+
+
+char * interpret(char * command){
+  static  char result[100]; int size=0;
+for(int i=0;i<strlen(command);i++)
+{
+    if(command[i]=='G')
+    result[size++]='G';
+    else if(command[i]=='(')
+    {
+        if(command[i+1]==')')
+    {result[size++]='o';i++;}
+    else
+    {result[size++]='a';
+    result[size++]='l';
+    i+=3;}
+    }
+}
+result[size]='\0';
+ return result;
+}
