@@ -1,0 +1,24 @@
+link: https://leetcode.com/problems/count-the-number-of-consistent-strings/description/
+
+
+
+int countConsistentStrings(char * allowed, char ** words, int wordsSize)
+{
+    int flag=0,count=0;
+    for(int i=0;i<wordsSize;i++)
+    { flag=0;
+        for(int j=0;j<strlen(words[i]);j++)
+        { flag=0;
+               for(int l=0;l<strlen(allowed);l++)
+               {
+                if(words[i][j]==allowed[l])
+                {flag=1;break;}
+               }
+            if(flag==0)
+            break;
+        }
+        if(flag==1)
+        count++;
+    }
+return count;
+}
