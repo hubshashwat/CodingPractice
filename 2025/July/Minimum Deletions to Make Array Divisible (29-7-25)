@@ -1,0 +1,39 @@
+link: https://leetcode.com/problems/minimum-deletions-to-make-array-divisible/description/
+
+
+int compare(const void* a, const void* b) {
+    return (*(int*)a - *(int*)b);
+}
+
+int gcd(int a, int b) {
+    if (b == 0) return a;
+    return gcd(b, a % b);
+}
+
+int minOperations(int* nums, int numsSize, int* numsDivide, int numsDivideSize) {
+    qsort(nums, numsSize, sizeof(int), compare);
+
+    // Compute GCD of numsDivide
+    int g = numsDivide[0];
+    for (int i = 1; i < numsDivideSize; i++) {
+        g = gcd(g, numsDivide[i]);
+    }
+
+    int count = 0, deletion = 0;
+
+    for (int i = 0; i < numsSize; i++) {
+        count = 0;
+
+        // Replace full inner loop with single check using GCD
+        if (g % nums[i] != 0) {
+            count++;
+            deletion++;
+        }
+
+        if (count == 0) {
+            return deletion;
+        }
+    }
+
+    return -1;
+}
