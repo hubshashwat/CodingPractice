@@ -1,0 +1,16 @@
+link: https://leetcode.com/problems/clear-digits/submissions/1721712729/
+
+char* clearDigits(char* s) {
+   static char stack[101];//+1 for null string character
+    int top=-1;
+    int len=strlen(s);
+    for(int i=0;i<len;i++)
+    {
+        if(top>=0 && isalpha(stack[top]) && isdigit(s[i]))
+        top--;
+        else
+        stack[++top]=s[i];
+    }
+    stack[++top]='\0';
+    return stack;
+}
