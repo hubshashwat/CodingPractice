@@ -1,0 +1,11 @@
+link: https://leetcode.com/problems/reverse-degree-of-a-string/description/
+
+int reverseDegree(char* s) {
+    int sum=0;
+    int len=strlen(s);
+    for(int i=0;i<len;i++)
+    {
+        sum+=(i+1)*(s[i]-(71+(2*(s[i]-97))));
+    }
+    return sum;
+}
