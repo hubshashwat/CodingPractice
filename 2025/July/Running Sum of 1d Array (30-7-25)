@@ -1,0 +1,16 @@
+link: https://leetcode.com/problems/running-sum-of-1d-array/description/
+
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* runningSum(int* nums, int numsSize, int* returnSize)
+{
+    int* runningsum =(int*)malloc(sizeof(int)*numsSize);
+    *returnSize=numsSize;
+    runningsum[0]=nums[0];
+    for(int i=1;i<numsSize;i++)
+    {
+     runningsum[i]=runningsum[i-1]+nums[i];
+    }
+return runningsum;
+}
