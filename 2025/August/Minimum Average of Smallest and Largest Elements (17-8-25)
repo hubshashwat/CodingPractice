@@ -1,0 +1,20 @@
+link: https://leetcode.com/problems/minimum-average-of-smallest-and-largest-elements/description/
+
+int compare(const void* a, const void* b) {
+    return (*(int*)a - *(int*)b);
+}
+
+double minimumAverage(int* nums, int numsSize) {
+double averages[50];
+ qsort(nums, numsSize, sizeof(int), compare);
+ int i;
+ for( i=0;i<(numsSize/2);i++)
+ averages[i]=((double)(nums[i]+nums[numsSize-i-1])/2.0);
+double min=averages[0];
+for(int j=0;j<i;j++)
+{
+    if(averages[j]<min)
+    min=averages[j];
+}
+return min;
+}
