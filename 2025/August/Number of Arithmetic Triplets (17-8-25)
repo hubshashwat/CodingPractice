@@ -1,0 +1,16 @@
+link: https://leetcode.com/problems/number-of-arithmetic-triplets/description/
+
+/**
+ * @param {number[]} nums
+ * @param {number} diff
+ * @return {number}
+ */
+var arithmeticTriplets = function(nums, diff) {
+    let count=0;
+    for(let i in nums)
+    {
+        if(nums.includes(nums[i]+diff) && nums.includes((nums[i]+2*diff)))
+        count++;
+    }
+    return count;
+};
