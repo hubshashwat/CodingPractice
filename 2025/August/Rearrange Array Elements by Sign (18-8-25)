@@ -1,0 +1,27 @@
+link: https://leetcode.com/problems/rearrange-array-elements-by-sign/description/
+
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* rearrangeArray(int* nums, int numsSize, int* returnSize) {
+    int* arr=(int*)malloc(sizeof(int)*numsSize);
+    *returnSize=numsSize;
+    int arrp[numsSize/2];int arrn[numsSize/2];
+    int sizep=0,sizen=0;
+    for(int i=0;i<numsSize;i++)
+    {
+        if(nums[i]> 0)
+        arrp[sizep++]=nums[i];
+        else
+        arrn[sizen++]=nums[i];
+    }
+    sizep=0,sizen=0;
+    for(int i=0;i<numsSize;i++)
+    {
+        if(i%2==0)
+        arr[i]=arrp[sizep++];
+        else
+        arr[i]=arrn[sizen++];
+    }
+    return arr;
+}
