@@ -1,0 +1,43 @@
+link: https://leetcode.com/problems/two-sum/description/
+
+#include <stdlib.h>
+
+typedef struct {
+    int value;
+    int index;
+} Pair;
+
+int comparePairs(const void* a, const void* b) {
+    return ((Pair*)a)->value - ((Pair*)b)->value;
+}
+
+int* twoSum(int* nums, int numsSize, int target, int* returnSize) {
+    Pair* pairs = (Pair*)malloc(numsSize * sizeof(Pair));
+    for (int i = 0; i < numsSize; i++) {
+        pairs[i].value = nums[i];
+        pairs[i].index = i; // store original index
+    }
+
+    // Sort by value
+    qsort(pairs, numsSize, sizeof(Pair), comparePairs);
+
+    int left = 0, right = numsSize - 1;
+    int* arr = (int*)malloc(2 * sizeof(int));
+
+    while (left < right) {
+        int sum = pairs[left].value + pairs[right].value;
+        if (sum > target) {
+            right--;
+        } else if (sum < target) {
+            left++;
+        } else {
+            arr[0] = pairs[left].index;
+            arr[1] = pairs[right].index;
+            break;
+        }
+    }
+
+    free(pairs);
+    *returnSize = 2;
+    return arr;
+}
