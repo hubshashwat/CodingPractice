@@ -1,0 +1,23 @@
+link: https://leetcode.com/problems/palindrome-number/description/
+
+/**
+ * @param {number} x
+ * @return {boolean}
+ */
+ function reverseNumber(num) {
+  const absoluteNum = Math.abs(num);
+
+  // Convert to string, split, reverse, and join
+  const reversedString = absoluteNum.toString().split('').reverse().join('');
+
+  // Convert back to number and apply the original sign
+  return parseFloat(reversedString);
+}
+var isPalindrome = function(x) {
+   if(Math.sign==-1)
+   return false
+   if(reverseNumber(x) == x)
+    return true;
+    else
+    return false;
+};
