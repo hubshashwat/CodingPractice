@@ -1,0 +1,29 @@
+link: https://leetcode.com/problems/sort-array-by-parity/description/
+
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* sortArrayByParity(int* nums, int numsSize, int* returnSize) {
+    *returnSize = numsSize;
+
+    // Allocate memory for result array
+    int* result = (int*)malloc(numsSize * sizeof(int));
+    for (int i = 0; i < numsSize; i++) {
+        result[i] = nums[i];  // copy original array
+    }
+
+    int *left = result;             // pointer to start
+    int *checkEven = result;        // pointer to traverse
+
+    while (checkEven < result + numsSize) {
+        if (*checkEven % 2 == 0) {
+            int temp = *left;
+            *left = *checkEven;
+            *checkEven = temp;
+            left++;
+        }
+        checkEven++;
+    }
+
+    return result;
+}
