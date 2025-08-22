@@ -1,0 +1,18 @@
+link: https://leetcode.com/problems/truncate-sentence/description/
+
+char* truncateSentence(char* s, int k) {
+    int length=strlen(s);
+    int count=0;
+  char* result=(char*)malloc(sizeof(char)*(length+1));
+   int i;
+    for(i=0;i<length;i++)
+    {
+     if(s[i]==' ')
+     count++;
+     if(count==k)
+     {break;}
+     result[i]=s[i];
+    }
+    result[i]='\0';
+    return result;
+}
