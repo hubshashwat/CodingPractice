@@ -1,0 +1,27 @@
+link: https://leetcode.com/problems/merge-strings-alternately/description/
+
+
+
+char * mergeAlternately(char * word1, char * word2)
+{
+  static char word[201]; int pos=0;
+  while(*word1 !='\0' && *word2 !='\0')
+  {
+   if(pos%2==0)
+   word[pos++]=*word1++;
+   else
+   word[pos++]=*word2++;
+  } 
+  if(*word1 != '\0')
+  {
+    while(*word1 != '\0')
+    word[pos++]=*word1++;
+  }
+  else
+  {
+    while(*word2 != '\0')
+    word[pos++]=*word2++;
+  }
+  word[pos]='\0';
+  return word;
+}
