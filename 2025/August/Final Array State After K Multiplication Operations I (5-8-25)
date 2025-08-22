@@ -1,0 +1,22 @@
+link: https://leetcode.com/problems/final-array-state-after-k-multiplication-operations-i/description/
+
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* getFinalState(int* nums, int numsSize, int k, int multiplier, int* returnSize) {
+    int minindex=0;int min=nums[0];
+    for(int i=1;i<=k;i++)
+    { minindex=0;min=nums[0];
+        for(int j=0;j<numsSize;j++)
+        {
+          if(nums[j]<min)
+          {
+            min=nums[j];
+            minindex=j;
+          }
+        }
+        nums[minindex]=(min*multiplier);
+    }
+    *returnSize=numsSize;
+    return nums;
+}
