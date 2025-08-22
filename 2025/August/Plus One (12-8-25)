@@ -1,0 +1,16 @@
+link: https://leetcode.com/problems/plus-one/description/
+
+/**
+ * @param {number[]} digits
+ * @return {number[]}
+ */
+var plusOne = function(digits) {
+    const digit=digits.join("");
+    let thedigit=BigInt(digit);
+    thedigit+=1n;
+    //const strdigit=String(thedigit);
+    //const result=strdigit.split("");
+    //const result= thedigit.toString().split('').map(Number);
+    const result = Array.from(String(thedigit), Number);
+    return result;
+};
