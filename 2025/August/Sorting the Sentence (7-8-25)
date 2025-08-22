@@ -1,0 +1,13 @@
+link: https://leetcode.com/problems/sorting-the-sentence/description/
+
+var sortSentence = function(s) {
+    const words = s.split(' ');
+    const sorted = [];
+
+    for (let word of words) {
+        const index = parseInt(word[word.length - 1]);
+        sorted[index - 1] = word.slice(0, -1); // Remove the last character (digit)
+    }
+
+    return sorted.join(' ');
+};
