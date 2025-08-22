@@ -1,0 +1,30 @@
+link: https://leetcode.com/problems/intersection-of-two-arrays/description/
+
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number[]}
+ */
+var intersection = function(nums1, nums2) {
+    const result= new Set();
+    let len;
+    if(nums1.length > nums2.length)
+    len=1;
+    else
+    len=2;
+    if(len==1)
+    {
+    for(let i of nums1)
+    {
+        if(nums2.includes(i))
+        result.add(i);
+    }}
+    if(len==2)
+    {
+    for(let i of nums2)
+    {
+        if(nums1.includes(i))
+        result.add(i);
+    }}
+    return [...result];
+};
