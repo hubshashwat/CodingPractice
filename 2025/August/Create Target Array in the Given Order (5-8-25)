@@ -1,0 +1,18 @@
+link: https://leetcode.com/problems/create-target-array-in-the-given-order/description/
+
+/**
+ * @param {number[]} nums
+ * @param {number[]} index
+ * @return {number[]}
+ */
+var createTargetArray = function(nums, index) {
+    let target=[];
+    const length=nums.length;
+    for(let i=0;i<length;i++)
+    {   if(target[index[i]]!=undefined)
+    { target.splice(index[i],0,nums[i]);}
+    else
+        target[index[i]]=nums[i];
+    }
+    return target;
+};
