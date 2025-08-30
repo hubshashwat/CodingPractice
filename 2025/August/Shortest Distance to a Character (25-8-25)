@@ -1,0 +1,28 @@
+link: https://leetcode.com/problems/shortest-distance-to-a-character/description/
+
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* shortestToChar(char* s, char c, int* returnSize) {
+    int min=0;
+    int len=strlen(s);
+    int count=0;
+    int* arr=(int*)malloc(sizeof(int)*len);
+    int occur[len]; int sizeo=0,size=0;
+    *returnSize=len;
+    for(int i=0;i<len;i++)
+    {
+        if(s[i]==c)
+        occur[sizeo++]=i;
+    }
+    for(int i=0;i<len;i++)
+    { min=len;
+        for(int j=0;j<sizeo;j++)
+       {
+        if(abs(occur[j]-i) < min)
+        min= abs(occur[j]-i);
+       }
+       arr[size++]=min;
+    }
+    return arr;
+}
