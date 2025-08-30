@@ -1,0 +1,42 @@
+link: https://leetcode.com/problems/find-all-k-distant-indices-in-an-array/description/
+
+#include <stdlib.h>
+#include <math.h>
+
+int compare(const void* a, const void* b) {
+    return (*(int*)a - *(int*)b);
+}
+
+int* findKDistantIndices(int* nums, int numsSize, int key, int k, int* returnSize) {
+    int* arr = (int*)malloc(sizeof(int) * numsSize);
+    int* mark = (int*)calloc(numsSize, sizeof(int));  // Mark visited indices
+    int size = 0;
+    int keyarr[1000];
+    int sizek = 0;
+
+    // Collect indices of key
+    for (int i = 0; i < numsSize; i++) {
+        if (nums[i] == key)
+            keyarr[sizek++] = i;
+    }
+
+    // Mark indices within distance k
+    for (int i = 0; i < sizek; i++) {
+        int start = keyarr[i] - k < 0 ? 0 : keyarr[i] - k;
+        int end = keyarr[i] + k >= numsSize ? numsSize - 1 : keyarr[i] + k;
+        for (int j = start; j <= end; j++) {
+            mark[j] = 1;
+        }
+    }
+
+    // Collect marked indices
+    for (int i = 0; i < numsSize; i++) {
+        if (mark[i]) arr[size++] = i;
+    }
+
+    free(mark);
+
+    qsort(arr, size, sizeof(int), compare);
+    *returnSize = size;
+    return arr;
+}
