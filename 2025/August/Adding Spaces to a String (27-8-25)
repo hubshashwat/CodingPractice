@@ -1,0 +1,26 @@
+link: https://leetcode.com/problems/adding-spaces-to-a-string/description/
+
+char* addSpaces(char* s, int* spaces, int spacesSize) {
+    int len = strlen(s);
+    int newLen = len + spacesSize;
+
+    // allocate space dynamically so it survives after function returns
+    char* string = (char*)malloc((newLen + 1) * sizeof(char));
+    
+
+    int scounter = 0;   // index for original string
+    int spaceIndex = 0; // index for spaces array
+
+    for (int i = 0; i < newLen; i++) {
+        // insert space if current position matches spaces[spaceIndex]
+        if (spaceIndex < spacesSize && scounter == spaces[spaceIndex]) {
+            string[i] = ' ';
+            spaceIndex++;
+        } else {
+            string[i] = s[scounter++];
+        }
+    }
+
+    string[newLen] = '\0'; // null terminate
+    return string;
+}
