@@ -1,0 +1,31 @@
+link: https://leetcode.com/problems/find-the-least-frequent-digit/description/
+
+/**
+ * @param {number} n
+ * @return {number}
+ */
+var getLeastFrequentDigit = function(n) {
+    const num=String(n);
+    const arr=num.split('');
+    arr.sort();
+    let count=0,minidx=0,min=arr.length;
+    let i,j;
+    for( i=0;i<arr.length;)
+        { count=1;
+            for( j=i+1;j<arr.length;j++)
+                {
+                    if(arr[i]!==arr[j])
+                        break;
+                    else
+                        count++;
+                }
+         
+            if(count<min||( count === min && arr[i] < arr[minidx]))
+            {
+                min=count;
+                minidx=i;
+            }
+         i=j;
+        }
+    return Number(arr[minidx]);
+};
