@@ -1,0 +1,16 @@
+link: https://leetcode.com/problems/check-divisibility-by-digit-sum-and-product/description/
+
+bool checkDivisibility(int n) {
+    int dsum=0,dproduct=1;
+    int num=n;
+    while(num>0)
+    {
+        int rem=num%10;
+        dsum+=rem;dproduct*=rem;
+        num/=10;
+    }
+    if(n % (dsum+dproduct)==0)
+    return true;
+    else
+    return false;
+}
