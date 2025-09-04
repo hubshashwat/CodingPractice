@@ -1,0 +1,20 @@
+link: https://leetcode.com/problems/gcd-of-odd-and-even-sums/description/
+
+int gcdOfOddEvenSums(int n) {
+    int gcd=0,num,sumeven=0,sumodd=0;
+    for(int i=1;i<=n;i++)
+    {
+        sumeven+=(2*i);
+        sumodd+=(2*i-1);
+    }
+    if(sumeven>sumodd)
+    num=sumeven;
+    else
+    num=sumodd;
+    for(int i=1;i<=num;i++)
+    {
+        if(sumeven%i==0 && sumodd%i==0)
+        gcd=i;
+    }
+    return gcd;
+}
