@@ -1,0 +1,16 @@
+link: https://leetcode.com/problems/restore-finishing-order/description/
+
+/**
+ * @param {number[]} order
+ * @param {number[]} friends
+ * @return {number[]}
+ */
+var recoverOrder = function(order, friends) {
+    let arr=[],size=0;
+    for(let i of order)
+    {
+        if(friends.includes(i))
+        arr[size++]=i;
+    }
+    return arr;
+};
