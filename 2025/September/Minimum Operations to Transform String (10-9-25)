@@ -1,0 +1,25 @@
+link: int minOperations(const char* s) {
+    // This will store the longest distance we find.
+    int max_ops_needed = 0;
+    int len = strlen(s);
+
+    // Loop through each character in the string.
+    for (int i = 0; i < len; i++) {
+        char current_char = s[i];
+        int ops_for_this_char = 0;
+
+        // Calculate the "distance" from the current character to 'a'.
+        // The alphabet is circular, so 'a' follows 'z'.
+        if (current_char != 'a') {
+            ops_for_this_char = (26 - (current_char - 'a'));
+        }
+
+        // If this character's distance is the largest we've seen,
+        // it becomes our new maximum.
+        if (ops_for_this_char > max_ops_needed) {
+            max_ops_needed = ops_for_this_char;
+        }
+    }
+
+    return max_ops_needed;
+}
