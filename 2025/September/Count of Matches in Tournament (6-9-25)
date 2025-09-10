@@ -1,0 +1,22 @@
+link: https://leetcode.com/problems/count-of-matches-in-tournament/description/
+
+
+
+int numberOfMatches(int n){
+    int num=n;
+    int matches=0;
+    while(num>1)
+    {
+        if(num%2==0)
+        {
+            matches+=num/2;
+            num/=2;
+        }
+        else
+        {
+            matches+=(num-1)/2;
+            num=((num-1)/2)+1;
+        }
+    }
+    return matches;
+}
