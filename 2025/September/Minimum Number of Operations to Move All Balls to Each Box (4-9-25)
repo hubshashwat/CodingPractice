@@ -1,0 +1,24 @@
+link: https://leetcode.com/problems/minimum-number-of-operations-to-move-all-balls-to-each-box/description/
+
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* minOperations(char* boxes, int* returnSize) {
+    int dist=0;
+    int len=strlen(boxes);
+    int* answer=(int*)malloc(sizeof(int)*(len+1));
+    *returnSize=len;
+    for(int i=0;i<len;i++)
+    {  int j=0;dist=0;
+        while(j<len)
+        {
+            if(boxes[j]=='1' && i!=j)
+            {
+              dist+=abs(i-j);
+            }
+            j++;
+        }
+        answer[i]=dist;
+    }
+    return answer;
+}
